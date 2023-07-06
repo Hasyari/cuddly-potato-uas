@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:orientation="vertical"
+    tools:context=".Home">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_marginBottom="20sp"
+        android:src="@drawable/ic_group" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="20sp"
+        android:text="Selamat Datang di Wisata Banten" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:background="@drawable/bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Nama" />
+        <EditText
+            android:id="@+id/input_nama_wisata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Kota" />
+        <EditText
+            android:id="@+id/input_kota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Deskripsi" />
+        <EditText
+            android:id="@+id/input_deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_simpandata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Simpan">
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
