@@ -5,6 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +26,12 @@ class Home : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var inputNamaWisata: EditText
+    private lateinit var inputKota: EditText
+    private lateinit var inputDeskripsi: EditText
+    private lateinit var btnSave: Button
+
+    private lateinit var databaseHandler: DatabaseHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +45,42 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        databaseHandler = DatabaseHandler(requireContext())
+        return view
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        databaseHandler.close()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        inputNamaWisata = requireView().findViewById(R.id.input_nama_wisata)
+        inputKota = requireView().findViewById(R.id.input_kota)
+        inputDeskripsi = requireView().findViewById(R.id.input_deskripsi)
+        btnSave = requireView().findViewById(R.id.btn_simpandata)
+
+        btnSave.setOnClickListener(View.OnClickListener {
+            if (validation()){
+                saveWisataData(inputNamaWisata.text.toString(), inputKota.text.toString(), inputDeskripsi.text.toString())
+            }
+        })
+    }
+    private fun saveWisataData(namaWisata: String, kotaWisata: String, deskripsiWisata: String) {
+        val wisata = Wisata(namaWisata = namaWisata, kotaWisata = kotaWisata, deskripsiWisata = deskripsiWisata)
+        databaseHandler.addWisata(wisata)
+        Toast.makeText(requireContext(), "Wisata data saved.", Toast.LENGTH_SHORT).show()
+    }
+    private fun validation(): Boolean{
+        var validate = false
+
+        if (inputNamaWisata.text.toString() != "" && inputKota.text.toString() != "" && inputDeskripsi.text.toString() != ""){
+            validate = true
+        }else{
+            validate = false
+            Toast.makeText(requireContext(), "Fill the blanks", Toast.LENGTH_SHORT).show()
+        }
+        return validate
     }
 
     companion object {

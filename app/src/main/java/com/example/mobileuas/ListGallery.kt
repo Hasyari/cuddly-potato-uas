@@ -1,6 +1,7 @@
 package com.example.mobileuas
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ class ListGallery : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var databaseHandler: DatabaseHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +36,21 @@ class ListGallery : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_gallery, container, false)
+        val view =  inflater.inflate(R.layout.fragment_list_gallery, container, false)
+        databaseHandler = DatabaseHandler(requireContext())
+        return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        logAllWisataData()
+    }
+
+    private fun logAllWisataData() {
+        val wisataList = databaseHandler.getAllWisata()
+        for (wisata in wisataList) {
+            Log.d("MyFragment", "Wisata: id=${wisata.id}, nama=${wisata.namaWisata}, kota=${wisata.kotaWisata}, deskripsi=${wisata.deskripsiWisata}")
+        }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
