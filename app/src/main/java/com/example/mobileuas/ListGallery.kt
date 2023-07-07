@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +23,8 @@ class ListGallery : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var wisataAdapter: WisataAdapter
     private lateinit var databaseHandler: DatabaseHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,20 +41,21 @@ class ListGallery : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_list_gallery, container, false)
+        recyclerView = view.findViewById(R.id.rcv_wisata)
         databaseHandler = DatabaseHandler(requireContext())
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        logAllWisataData()
+        super.onViewCreated(view, savedInstanceState)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val data: ArrayList<Wisata> = ArrayList()
+        data.addAll(databaseHandler.getAllWisata())
+        wisataAdapter = WisataAdapter(data)
+        recyclerView.adapter = wisataAdapter
     }
 
-    private fun logAllWisataData() {
-        val wisataList = databaseHandler.getAllWisata()
-        for (wisata in wisataList) {
-            Log.d("MyFragment", "Wisata: id=${wisata.id}, nama=${wisata.namaWisata}, kota=${wisata.kotaWisata}, deskripsi=${wisata.deskripsiWisata}")
-        }
-    }
     companion object {
         /**
          * Use this factory method to create a new instance of

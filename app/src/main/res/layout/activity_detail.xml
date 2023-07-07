@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".DetailActivity">
+
+    <ImageView
+        android:id="@+id/detailimage"
+        android:layout_width="match_parent"
+        android:src="@drawable/bg"
+        android:layout_marginBottom="10dp"
+        android:layout_height="200dp"/>
+
+    <TextView
+        android:id="@+id/detailnama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailimage"
+        android:text="Ini Text Judul"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/detailkota"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/detailimage"
+        android:layout_alignParentEnd="true"
+        android:textSize="12sp"
+        android:text="Kota" />
+
+    <TextView
+        android:id="@+id/detaildeskripsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailkota"
+        android:layout_marginTop="30dp"
+        android:text="Deskripsi"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+</RelativeLayout>

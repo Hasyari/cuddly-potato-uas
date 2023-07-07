@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.EditText
@@ -69,6 +68,9 @@ class Home : Fragment() {
     private fun saveWisataData(namaWisata: String, kotaWisata: String, deskripsiWisata: String) {
         val wisata = Wisata(namaWisata = namaWisata, kotaWisata = kotaWisata, deskripsiWisata = deskripsiWisata)
         databaseHandler.addWisata(wisata)
+        inputNamaWisata.setText("")
+        inputKota.setText("")
+        inputDeskripsi.setText("")
         Toast.makeText(requireContext(), "Wisata data saved.", Toast.LENGTH_SHORT).show()
     }
     private fun validation(): Boolean{

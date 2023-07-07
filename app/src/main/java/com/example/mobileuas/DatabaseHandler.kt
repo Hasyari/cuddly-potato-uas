@@ -58,7 +58,31 @@ class DatabaseHandler(context: Context) :
 
         return wisataList
     }
-    // Variabel Mapping
+    @SuppressLint("Range")
+    fun getWisataById(id: Long): Wisata? {
+        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+
+        val db = readableDatabase
+        val cursor = db.rawQuery(selectQuery, selectionArgs)
+
+        var wisata: Wisata? = null
+
+        if (cursor.moveToFirst()) {
+            val id = cursor.getLong(cursor.getColumnIndex(ID))
+            val namaWisata = cursor.getString(cursor.getColumnIndex(NAMA_WISATA))
+            val kotaWisata = cursor.getString(cursor.getColumnIndex(KOTA_WISATA))
+            val deskripsiWisata = cursor.getString(cursor.getColumnIndex(DESKRIPSI_WISATA))
+
+            wisata =  Wisata(id, namaWisata, kotaWisata, deskripsiWisata)
+        }
+
+        cursor.close()
+        db.close()
+
+        return wisata
+    }
+
     companion object {
         private val DB_NAME = "WisataDB"
         private val DB_VERSION = 1;
